@@ -7,6 +7,7 @@ import { MessageScreen } from "screens/Message";
 import { AppTabsNavigationKey } from "./navigationKey";
 import { Box, useTheme } from "native-base";
 import { useBackgroundColor } from "hooks/index";
+import { BudgetScreen } from "screens/Budget";
 
 const BottomTab = createBottomTabNavigator<AppTabsStackParamList>();
 
@@ -44,6 +45,16 @@ export default function AppTabsNavigator() {
         component={MessageScreen}
         options={{
           title: AppTabsNavigationKey.Message,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="comment" color={color} />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name={AppTabsNavigationKey.Budget}
+        component={BudgetScreen}
+        options={{
+          title: AppTabsNavigationKey.Budget,
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="comment" color={color} />
           ),

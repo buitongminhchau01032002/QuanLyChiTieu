@@ -6,6 +6,7 @@ export enum AuthNavigationKey {
 export enum AppTabsNavigationKey {
   Home = "Home",
   Message = "Message",
+  Budget = "Budget"
 }
 
 export enum AppDrawerNavigationKey {

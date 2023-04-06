@@ -26,6 +26,7 @@ declare global {
 export type AppTabsStackParamList = {
   [AppTabsNavigationKey.Home]: undefined;
   [AppTabsNavigationKey.Message]: undefined;
+  [AppTabsNavigationKey.Budget]: undefined;
 };
 
 export type AuthStackParamList = {
