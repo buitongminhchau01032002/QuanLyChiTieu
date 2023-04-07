@@ -1,5 +1,5 @@
 
-import { Box, Divider, Flex, Icon, Image, ScrollView, Spacer, Text, View } from "native-base";
+import { Box, Button, Divider, Flex, Icon, Image, List, ScrollView, Spacer, Text, View } from "native-base";
 import { AppBar } from "components/AppBar";
 import React, { useState } from 'react';
 import { APP_PADDING } from "app/constants/Layout";
@@ -9,6 +9,15 @@ import { FontAwesome } from "@expo/vector-icons";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { TabItem } from "./components/TabItem";
 import Vi from "i18n/translations/vi";
+import { ProgessBar } from "./components/ProgessBar";
+import { TouchableOpacity } from "react-native-gesture-handler";
+
+type Budget = {
+    imgUrl: string,
+    title: string,
+    budget: Number,
+    used: Number
+}
 
 
 
@@ -20,6 +29,10 @@ export const BudgetScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey
         { title: 'LAST MONTH', value: false },
         { title: 'THIS MONTH', value: false },
     ]);
+
+    const budget = [
+        { imgUrl: '' }
+    ]
 
     return (
         <Box h="full">
@@ -54,47 +67,214 @@ export const BudgetScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey
 
                     <View backgroundColor={'gray.200'} padding={4} borderRadius={16} >
 
-                        <View flexDirection={'row'} shadow={1}>
+                        <View flexDirection={'row'} justifyContent={'space-between'} >
                             <Text fontSize='lg' fontWeight={'bold'} marginBottom={1}>Total budget</Text>
-                            <View flex={1}></View>
                             <Text fontSize='lg' bold={true}>28,282</Text>
                         </View>
+
                         <Text fontSize='md' color='gray.500'>1 budget</Text>
+
                         <Divider marginY={2} paddingY={0.25}></Divider>
-                        <View flexDirection={'row'} shadow={1} marginBottom={1}>
+
+                        <View flexDirection={'row'} shadow={1} marginBottom={1} justifyContent={'space-between'}>
                             <Text fontSize='md'>Spent</Text>
-                            <View flex={1}></View>
                             <Text fontSize='md' color={'red.500'}>28,282</Text>
                         </View>
-                        <View flexDirection={'row'} shadow={1}>
+
+                        <View flexDirection={'row'} justifyContent={'space-between'}>
                             <Text fontSize='md'>Remain</Text>
-                            <View flex={1}></View>
                             <Text fontSize='md' color={'blue.500'}>28,282</Text>
                         </View>
                     </View>
 
                     <Spacer height='10'></Spacer>
 
-                    <View flexDirection={'row'}>
+                    <View flexDirection={'row'} justifyContent={'space-between'}>
                         <Text fontSize='lg' marginBottom={1}>Total budget</Text>
-                        <View flex={1}></View>
                         <View flexDirection={'row'} >
                             <Text fontSize={'lg'} marginRight={2} color={'green.500'}>New group</Text>
                             <Icon as={<FontAwesome name="plus-circle" />} size={6} color='green.500' />
                         </View>
                     </View>
 
-                    <View flexDirection={'row'}>
-                        <Image source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} width={20} height={20} alt="description of image"></Image>
-                        <Box flex={1} backgroundColor={'amber.100'} height={20} >
-                            <Box width={'30'} height={'2'} backgroundColor={'red.200'} marginY={5}></Box>
-                            <Box width={'30'} height={'2'} backgroundColor={'blue.200'}></Box>
+                    <View flexDirection={'row'} paddingTop={2} paddingBottom={10}>
+                        <Image source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} width={20} height={20} alt="description of image" borderRadius={50} size={10}></Image>
+
+                        <Box flex={1} paddingX={2}>
+                            <View flexDirection={'row'} justifyContent={'space-between'}>
+                                <Text fontSize='lg'>Eat and drink</Text>
+                                <Text fontSize='lg' fontWeight={'bold'}>28,282</Text>
+                            </View>
+                            <Text fontSize='md' color={'gray.400'} alignSelf={'flex-end'}>28,282</Text>
+                            <ProgessBar value={80}></ProgessBar>
+                           
                         </Box>
+
                     </View>
+                    <Divider></Divider>
+                    
+
+                    <View flexDirection={'row'} paddingTop={2}>
+                        <Image source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} width={20} height={20} alt="description of image" borderRadius={50} size={10}></Image>
+
+                        <Box flex={1} paddingX={2} paddingBottom={10}>
+                            <View flexDirection={'row'} justifyContent={'space-between'}>
+                                <Text fontSize='lg'>Eat and drink</Text>
+                                <Text fontSize='lg' fontWeight={'bold'}>28,282</Text>
+                            </View>
+                            <Text fontSize='md' color={'gray.400'} alignSelf={'flex-end'}>28,282</Text>
+                            <ProgessBar value={80}></ProgessBar>
+                        </Box>
+                        
+
+                    </View>
+                    <Divider></Divider>
+
+                    <View flexDirection={'row'} paddingY={2}>
+                        <Image source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} width={20} height={20} alt="description of image" borderRadius={50} size={10}></Image>
+
+                        <Box flex={1} paddingX={2}>
+                            <View flexDirection={'row'} justifyContent={'space-between'}>
+                                <Text fontSize='lg'>Eat and drink</Text>
+                                <TouchableOpacity style={
+                                    {
+                                        borderRadius: 20,
+                                        borderWidth : 1,
+                                        paddingHorizontal: 10,
+                                        borderColor : 'gray'
+                                    }
+                                }><Text fontSize='lg'>Add</Text></TouchableOpacity>
+                            </View>
+
+                        </Box>
+
+                    </View>
+                    <Divider></Divider>
+                    <View flexDirection={'row'} paddingY={2}>
+                        <Image source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} width={20} height={20} alt="description of image" borderRadius={50} size={10}></Image>
+
+                        <Box flex={1} paddingX={2}>
+                            <View flexDirection={'row'} justifyContent={'space-between'}>
+                                <Text fontSize='lg'>Eat and drink</Text>
+                                <TouchableOpacity style={
+                                    {
+                                        borderRadius: 20,
+                                        borderWidth : 1,
+                                        paddingHorizontal: 10,
+                                        borderColor : 'gray'
+                                    }
+                                }><Text fontSize='lg'>Add</Text></TouchableOpacity>
+                            </View>
+
+                        </Box>
+
+                    </View>
+                    <Divider></Divider>
+                    <View flexDirection={'row'} paddingY={2}>
+                        <Image source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} width={20} height={20} alt="description of image" borderRadius={50} size={10}></Image>
+
+                        <Box flex={1} paddingX={2}>
+                            <View flexDirection={'row'} justifyContent={'space-between'}>
+                                <Text fontSize='lg'>Eat and drink</Text>
+                                <TouchableOpacity style={
+                                    {
+                                        borderRadius: 20,
+                                        borderWidth : 1,
+                                        paddingHorizontal: 10,
+                                        borderColor : 'gray'
+                                    }
+                                }><Text fontSize='lg'>Add</Text></TouchableOpacity>
+                            </View>
+
+                        </Box>
+
+                    </View>
+                    <Divider></Divider>
+                    <View flexDirection={'row'} paddingY={2}>
+                        <Image source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} width={20} height={20} alt="description of image" borderRadius={50} size={10}></Image>
+
+                        <Box flex={1} paddingX={2}>
+                            <View flexDirection={'row'} justifyContent={'space-between'}>
+                                <Text fontSize='lg'>Eat and drink</Text>
+                                <TouchableOpacity style={
+                                    {
+                                        borderRadius: 20,
+                                        borderWidth : 1,
+                                        paddingHorizontal: 10,
+                                        borderColor : 'gray'
+                                    }
+                                }><Text fontSize='lg'>Add</Text></TouchableOpacity>
+                            </View>
+
+                        </Box>
+
+                    </View>
+                    <Divider></Divider>
+                    <View flexDirection={'row'} paddingY={2}>
+                        <Image source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} width={20} height={20} alt="description of image" borderRadius={50} size={10}></Image>
+
+                        <Box flex={1} paddingX={2}>
+                            <View flexDirection={'row'} justifyContent={'space-between'}>
+                                <Text fontSize='lg'>Eat and drink</Text>
+                                <TouchableOpacity style={
+                                    {
+                                        borderRadius: 20,
+                                        borderWidth : 1,
+                                        paddingHorizontal: 10,
+                                        borderColor : 'gray'
+                                    }
+                                }><Text fontSize='lg'>Add</Text></TouchableOpacity>
+                            </View>
+
+                        </Box>
+
+                    </View>
+                    <Divider></Divider>
+                    <View flexDirection={'row'} paddingY={2}>
+                        <Image source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} width={20} height={20} alt="description of image" borderRadius={50} size={10}></Image>
+
+                        <Box flex={1} paddingX={2}>
+                            <View flexDirection={'row'} justifyContent={'space-between'}>
+                                <Text fontSize='lg'>Eat and drink</Text>
+                                <TouchableOpacity style={
+                                    {
+                                        borderRadius: 20,
+                                        borderWidth : 1,
+                                        paddingHorizontal: 10,
+                                        borderColor : 'gray'
+                                    }
+                                }><Text fontSize='lg'>Add</Text></TouchableOpacity>
+                            </View>
+
+                        </Box>
+
+                    </View>
+                    <Divider></Divider>
+                    <View flexDirection={'row'} paddingY={2}>
+                        <Image source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} width={20} height={20} alt="description of image" borderRadius={50} size={10}></Image>
+
+                        <Box flex={1} paddingX={2}>
+                            <View flexDirection={'row'} justifyContent={'space-between'}>
+                                <Text fontSize='lg'>Eat and drink</Text>
+                                <TouchableOpacity style={
+                                    {
+                                        borderRadius: 20,
+                                        borderWidth : 1,
+                                        paddingHorizontal: 10,
+                                        borderColor : 'gray'
+                                    }
+                                }><Text fontSize='lg'>Add</Text></TouchableOpacity>
+                            </View>
+
+                        </Box>
+
+                    </View>
+                    <Divider></Divider>
+
 
                 </ScrollView>
 
-            </View>
-        </Box>
+            </View >
+        </Box >
     );
 };
