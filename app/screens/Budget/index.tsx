@@ -1,7 +1,7 @@
 
-import { Box, Button, Divider, Flex, Icon, Image, List, ScrollView, Spacer, Text, View } from "native-base";
+import { Box, Button, Divider, Flex, HStack, Icon, Image, List, ScrollView, Spacer, Text, View } from "native-base";
 import { AppBar } from "components/AppBar";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { APP_PADDING } from "app/constants/Layout";
 import { AppTabsStackScreenProps } from 'types';
 import { AppTabsNavigationKey } from 'navigation/navigationKey';
@@ -34,9 +34,22 @@ export const BudgetScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey
         { imgUrl: '' }
     ]
 
+    useEffect(() => {
+        props.navigation.setOptions({
+            headerRight: () => (
+                <HStack
+                    space={2}
+                >
+                    <Icon as={<FontAwesome name="search" />} size={6} />
+                    <FontAwesome5 name="wallet" size={24} />
+                </HStack>
+            ),
+        });
+    }, [props.navigation]);
+
     return (
         <Box h="full">
-            <AppBar
+            {/* <AppBar
                 title="Budget"
                 bg="primary.900"
                 onPressDefaultLeftButton={() => props.navigation.openDrawer()}
@@ -49,7 +62,7 @@ export const BudgetScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey
                         <FontAwesome5 name="wallet" size={24} color="white" />
                     </View>
                 }
-            />
+            /> */}
             <View p={APP_PADDING} w="full" flex={1} flexDirection={'column'}>
                 <ScrollView>
 
@@ -89,9 +102,9 @@ export const BudgetScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey
 
                     <Spacer height='10'></Spacer>
 
-                    <View flexDirection={'row'} justifyContent={'space-between'}>
+                    <View flexDirection={'row'} justifyContent={'space-between'} alignItems='center'>
                         <Text fontSize='lg' marginBottom={1}>Total budget</Text>
-                        <View flexDirection={'row'} >
+                        <View flexDirection={'row'} alignItems='center'>
                             <Text fontSize={'lg'} marginRight={2} color={'green.500'}>New group</Text>
                             <Icon as={<FontAwesome name="plus-circle" />} size={6} color='green.500' />
                         </View>
@@ -107,12 +120,12 @@ export const BudgetScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey
                             </View>
                             <Text fontSize='md' color={'gray.400'} alignSelf={'flex-end'}>28,282</Text>
                             <ProgessBar value={80}></ProgessBar>
-                           
+
                         </Box>
 
                     </View>
                     <Divider></Divider>
-                    
+
 
                     <View flexDirection={'row'} paddingTop={2}>
                         <Image source={{ uri: 'https://reactnative.dev/img/tiny_logo.png' }} width={20} height={20} alt="description of image" borderRadius={50} size={10}></Image>
@@ -125,7 +138,7 @@ export const BudgetScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey
                             <Text fontSize='md' color={'gray.400'} alignSelf={'flex-end'}>28,282</Text>
                             <ProgessBar value={80}></ProgessBar>
                         </Box>
-                        
+
 
                     </View>
                     <Divider></Divider>
@@ -139,9 +152,9 @@ export const BudgetScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey
                                 <TouchableOpacity style={
                                     {
                                         borderRadius: 20,
-                                        borderWidth : 1,
+                                        borderWidth: 1,
                                         paddingHorizontal: 10,
-                                        borderColor : 'gray'
+                                        borderColor: 'gray'
                                     }
                                 }><Text fontSize='lg'>Add</Text></TouchableOpacity>
                             </View>
@@ -159,9 +172,9 @@ export const BudgetScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey
                                 <TouchableOpacity style={
                                     {
                                         borderRadius: 20,
-                                        borderWidth : 1,
+                                        borderWidth: 1,
                                         paddingHorizontal: 10,
-                                        borderColor : 'gray'
+                                        borderColor: 'gray'
                                     }
                                 }><Text fontSize='lg'>Add</Text></TouchableOpacity>
                             </View>
@@ -179,9 +192,9 @@ export const BudgetScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey
                                 <TouchableOpacity style={
                                     {
                                         borderRadius: 20,
-                                        borderWidth : 1,
+                                        borderWidth: 1,
                                         paddingHorizontal: 10,
-                                        borderColor : 'gray'
+                                        borderColor: 'gray'
                                     }
                                 }><Text fontSize='lg'>Add</Text></TouchableOpacity>
                             </View>
@@ -199,9 +212,9 @@ export const BudgetScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey
                                 <TouchableOpacity style={
                                     {
                                         borderRadius: 20,
-                                        borderWidth : 1,
+                                        borderWidth: 1,
                                         paddingHorizontal: 10,
-                                        borderColor : 'gray'
+                                        borderColor: 'gray'
                                     }
                                 }><Text fontSize='lg'>Add</Text></TouchableOpacity>
                             </View>
@@ -219,9 +232,9 @@ export const BudgetScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey
                                 <TouchableOpacity style={
                                     {
                                         borderRadius: 20,
-                                        borderWidth : 1,
+                                        borderWidth: 1,
                                         paddingHorizontal: 10,
-                                        borderColor : 'gray'
+                                        borderColor: 'gray'
                                     }
                                 }><Text fontSize='lg'>Add</Text></TouchableOpacity>
                             </View>
@@ -239,9 +252,9 @@ export const BudgetScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey
                                 <TouchableOpacity style={
                                     {
                                         borderRadius: 20,
-                                        borderWidth : 1,
+                                        borderWidth: 1,
                                         paddingHorizontal: 10,
-                                        borderColor : 'gray'
+                                        borderColor: 'gray'
                                     }
                                 }><Text fontSize='lg'>Add</Text></TouchableOpacity>
                             </View>
@@ -259,9 +272,9 @@ export const BudgetScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey
                                 <TouchableOpacity style={
                                     {
                                         borderRadius: 20,
-                                        borderWidth : 1,
+                                        borderWidth: 1,
                                         paddingHorizontal: 10,
-                                        borderColor : 'gray'
+                                        borderColor: 'gray'
                                     }
                                 }><Text fontSize='lg'>Add</Text></TouchableOpacity>
                             </View>
