@@ -1,23 +1,25 @@
 export enum AuthNavigationKey {
-  SignIn = "SignIn",
-  SignUp = "SignUp",
+    SignIn = 'SignIn',
+    SignUp = 'SignUp',
 }
 
 export enum AppTabsNavigationKey {
-  Home = "Home",
-  Message = "Message",
+    Home = 'Home',
+    Message = 'Message',
+    FloatButton = 'FloatButton',
+    Account = 'Account',
 }
 
 export enum AppDrawerNavigationKey {
-  AppTabs = "General",
+    AppTabs = 'General',
 }
 
 export enum RootNavigatekey {
-  AppDrawer = "AppDrawer",
-  Auth = "Auth",
-  Intro = "Intro",
-  MessageDetail = "MessageDetail",
-  
-  Modal = "Modal",
-  NotFound = "NotFound",
+    AppDrawer = 'AppDrawer',
+    Auth = 'Auth',
+    Intro = 'Intro',
+    Wallet = 'Wallet',
+    MessageDetail = 'MessageDetail',
+    Modal = 'Modal',
+    NotFound = 'NotFound',
 }

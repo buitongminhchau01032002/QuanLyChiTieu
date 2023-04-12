@@ -24,6 +24,7 @@ import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { reLogin } from 'slice/auth';
 import { MessageDetailScreen } from 'screens/Message/pages/MessagesDetail';
+import { WalletScreen } from 'screens/Wallet';
 
 export default function Navigation() {
     // hooks
@@ -76,11 +77,14 @@ function RootNavigator() {
             {!isLogin ? (
                 <Stack.Screen name={RootNavigatekey.Auth} component={AuthNavigator} options={{ headerShown: false }} />
             ) : (
-                <Stack.Screen
-                    name={RootNavigatekey.AppDrawer}
-                    component={AppDrawerNavigator}
-                    options={{ headerShown: false }}
-                />
+                <>
+                    <Stack.Screen
+                        name={RootNavigatekey.AppDrawer}
+                        component={AppDrawerNavigator}
+                        options={{ headerShown: false }}
+                    />
+                    <Stack.Screen name={RootNavigatekey.Wallet} component={WalletScreen} />
+                </>
             )}
             <Stack.Group navigationKey={isLogin ? 'user' : 'guest'} screenOptions={{ presentation: 'modal' }}>
                 <Stack.Screen
