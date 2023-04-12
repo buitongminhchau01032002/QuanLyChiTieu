@@ -16,7 +16,7 @@ import {
 
 declare global {
     namespace ReactNavigation {
-        interface RootParamList extends RootStackParamList {}
+        interface RootParamList extends RootStackParamList { }
     }
 }
 // params type
@@ -24,6 +24,7 @@ export type AppTabsStackParamList = {
     [AppTabsNavigationKey.Home]: undefined;
     [AppTabsNavigationKey.Message]: undefined;
     [AppTabsNavigationKey.FloatButton]: undefined;
+    [AppTabsNavigationKey.Budget]: undefined;
     [AppTabsNavigationKey.Account]: undefined;
 };
 
