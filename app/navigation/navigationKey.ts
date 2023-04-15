@@ -6,7 +6,7 @@ export enum AuthNavigationKey {
 export enum AppTabsNavigationKey {
     Home = 'Home',
     Message = 'Message',
-    FloatButton = 'FloatButton',
+    FloatButton = 'Add Transaction',
     Account = 'Account',
     Budget = 'Budget',
 }

@@ -8,7 +8,7 @@ import { AppTabsNavigationKey, RootNavigatekey } from './navigationKey';
 import { Avatar, Box, Button, Icon, View, useTheme } from 'native-base';
 import { useBackgroundColor } from 'hooks/index';
 import { AccountScreen } from 'screens/Account';
-import { FakeScreen } from 'screens/FloatButton';
+import { AddTransactionScreeen } from 'screens/FloatButton';
 import { BudgetScreen } from "screens/Budget";
 
 const BottomTab = createBottomTabNavigator<AppTabsStackParamList>();
@@ -50,21 +50,28 @@ export default function AppTabsNavigator() {
       />
       <BottomTab.Screen
         name={AppTabsNavigationKey.FloatButton}
-        component={FakeScreen}
+        component={AddTransactionScreeen}
         options={{
-          tabBarButton: () => (
-            <Button
-              borderRadius={200}
-              bottom="60%"
-              h={16}
-              w={16}
-              shadow={1}
-              onPress={() => console.log('adf')}
-            >
-              <Icon as={<FontAwesome />} name="plus" style={{ marginLeft: 4 }} color="white"></Icon>
-            </Button>
+          title: AppTabsNavigationKey.FloatButton,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="plus" color={color} />
           ),
         }}
+      // options={{
+      //   title: AppTabsNavigationKey.FloatButton,
+      //   tabBarButton: () => (
+      //     <Button
+      //       borderRadius={200}
+      //       bottom="60%"
+      //       h={16}
+      //       w={16}
+      //       shadow={1}
+      //       onPress={() => console.log('adf')}
+      //     >
+      //       <Icon as={<FontAwesome />} name="plus" style={{ marginLeft: 4 }} color="white"></Icon>
+      //     </Button>
+      //   ),
+      // }}
       />
       <BottomTab.Screen
         name={AppTabsNavigationKey.Budget}
