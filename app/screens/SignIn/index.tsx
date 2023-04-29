@@ -15,11 +15,12 @@ import {
   ScrollView,
   Checkbox,
   Button,
+  Center,
+  Heading,
 } from "native-base";
 import Animated from "react-native-reanimated";
 import { AuthStackScreenProps } from "../../../types";
 import { useState } from "react";
-import { FontAwesome } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import React from "react";
 import * as Yup from "yup";
@@ -34,15 +35,32 @@ import { CButton } from "components/Button";
 import { APP_PADDING } from "app/constants/Layout";
 import { AvatarLogin } from "./components/AvatarLogin";
 import { useLoginAnimation } from "./hooks";
-
+import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
+import { emailValidator } from "app/helpers/emailValidator";
+import { passwordValidator } from "app/helpers/passwordValidator";
 export const SignInScreen = ({
   navigation,
 }: AuthStackScreenProps<AuthNavigationKey.SignIn>) => {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
+  const [loading, setLoading] = useState(false);
 
+  const onClickSignin = async () => {
+    navigation.navigate(AuthNavigationKey.SignUp);
+  };
 
-
+  const onLoginPressed = () => {
+    
+    const emailError = emailValidator(email.value)
+   // const passwordError = passwordValidator(password.value)
+    if (emailError || password.value) {
+      setEmail({ ...email, error: emailError })
+      setPassword({ ...password, error: 'Please enter your Password' })
+      return
+    }
+    //code bla bla 
+   
+  }
   // hooks
   const { t } = useTranslation();
   const toast = useToast();
@@ -94,55 +112,107 @@ export const SignInScreen = ({
     password: Yup.string().required(t("general.required-field") ?? ""),
   });
   return (
-    <Box flex={1}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        flex={1}
-        padding={12}
-        w="full"
-        alignSelf="center"
-        alignItems="center"
-        justifyContent="center">
 
-        <VStack w='full' space={6} alignItems="center">
-          <Text fontSize="20" fontWeight="bold"> Wellcome to our App!</Text>
-          <Input
-            size="xl"
-            placeholder="Email"
-            returnKeyType="next"
-            value={email.value}
-            onChangeText={(text) => setEmail({ value: text, error: '' })}
-            autoCapitalize="none"
-            autoComplete="email"
-            textContentType="emailAddress"
-            keyboardType="email-address"
-          />
-          <Input
-            size="xl"
-            placeholder="Password"
-            returnKeyType="done"
-            value={password.value}
-            onChangeText={(text) => setPassword({ value: text, error: '' })}
-            secureTextEntry />
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      flex={1}
+      p={12}
+      w="full"
+      alignSelf="center"
+      justifyContent="center">
 
-          <Button
-            small
-            primary
-            w='full'
-          >
-            <Text fontWeight='bold' fontSize={16} color={"white"}>LOGIN</Text>
-          </Button>
-          <Box
-            flexDirection='row'
-            marginTop={2}>
-            <Text>Don’t have an account? </Text>
-            <Box >
-              <Text color={"green.500"}>Sign up</Text>
-            </Box>
-          </Box>
-        </VStack>
-       
+      <Flex safeArea flex={1}>
+        <Center justifyContent='center' w='full' >
+          <Box flexDirection="column" safeArea p="2" py="8" w="full">
+            <Heading
+              textAlign="center"
+              size="lg"
+              fontWeight="600"
+              color="coolGray.800"
+              _dark={{
+                color: "warmGray.50",
+              }}
+            >
+              Welcome
+            </Heading>
+            <Heading
+              textAlign="center"
+              mt="1"
+              _dark={{
+                color: "warmGray.200",
+              }}
+              color="coolGray.600"
+              fontWeight="medium"
+              size="xs"
+            >
+              Sign In to continue!
+            </Heading>
+
+            <VStack space={3} mt="5" >
+              <FormControl  isRequired isInvalid={email.error.length > 0}>
+                <FormControl.Label>Email</FormControl.Label>
+                <Input
+                  value={email.value}
+                  onChangeText={value => setEmail({ value: value, error: '' })}
+                  placeholder=" Email"
+                  size='lg'
+                  InputLeftElement={
+                    <Icon
+                      as={<MaterialIcons name="mail" />}
+                      size={5}
+                      ml="2"
+                      color="muted.400"
+                    />
+                  }/>
+                 {'error' in email ? <FormControl.ErrorMessage>{email.error}</FormControl.ErrorMessage> : null}
+              </FormControl>
+              <FormControl
+              isRequired isInvalid={password.error.length > 0}
+              >
+                <FormControl.Label>Password</FormControl.Label>
+                <Input
+                  value={password.value}
+                  onChangeText={value => setPassword({ value: value, error: '' })}
+                  placeholder=" Password"
+                  size='lg'
+                  InputLeftElement={
+                    <Icon
+                      as={<MaterialIcons name="lock" />}
+                      size={5}
+                      ml="2"
+                      color="muted.400"
+                    />
+                  }
+                  type={show ? "text" : "password"} InputRightElement={<Pressable onPress={() => setShow(!show)}>
+                    <Icon as={<MaterialIcons name={show ? "visibility" : "visibility-off"} />} size={5} mr="2" color="muted.400" />
+                  </Pressable>}
+                />
+                 {'error' in password ? <FormControl.ErrorMessage>{password.error}</FormControl.ErrorMessage> : null}
+              </FormControl>
+              <Button
+                mt="2"
+                size='lg'
+                // colorScheme="indigo"
+                onPress={() => onLoginPressed()}
+              
+                isLoading={loading}
+              >
+               Login
+              </Button>
+              <Flex
+                flexDirection='row'
+                justifyContent='center'
+                marginTop={2}
+                >
+                <Text>Don’t have an account? </Text>
+                <Text color={"green.500"} onPress={() => onClickSignin()}>Sign up</Text>
+              </Flex>
+              
+          </VStack> 
+        </Box>
+    </Center> 
+        </Flex> 
+        
       </KeyboardAvoidingView>
-    </Box>
-  )
+  ) 
 };
