@@ -152,6 +152,7 @@ export const SignInScreen = ({
               <FormControl  isRequired isInvalid={email.error.length > 0}>
                 <FormControl.Label>Email</FormControl.Label>
                 <Input
+                autoCapitalize="none"
                   value={email.value}
                   onChangeText={value => setEmail({ value: value, error: '' })}
                   placeholder=" Email"
