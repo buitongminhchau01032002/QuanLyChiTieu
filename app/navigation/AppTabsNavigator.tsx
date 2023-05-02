@@ -10,8 +10,10 @@ import { useBackgroundColor } from 'hooks/index';
 import { AccountScreen } from 'screens/Account';
 import { FakeScreen } from 'screens/FloatButton';
 import { BudgetScreen } from "screens/Budget";
+import { NotificationScreen } from 'screens/Notification';
 
 const BottomTab = createBottomTabNavigator<AppTabsStackParamList>();
+
 
 export default function AppTabsNavigator() {
   const { tabBarBackground } = useBackgroundColor();
@@ -83,6 +85,11 @@ export default function AppTabsNavigator() {
           title: 'Account',
           tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
         }}
+      />
+       <BottomTab.Screen
+        name={AppTabsNavigationKey.Notification}
+        component={NotificationScreen}
+        
       />
     </BottomTab.Navigator>
   );

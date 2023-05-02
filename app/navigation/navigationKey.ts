@@ -9,6 +9,11 @@ export enum AppTabsNavigationKey {
     FloatButton = 'FloatButton',
     Account = 'Account',
     Budget = 'Budget',
+    Notification = 'Notification',
+}
+
+export enum HomeNavigationKey {
+    Notification = 'Notification',
 }
 
 export enum AppDrawerNavigationKey {
@@ -23,4 +28,6 @@ export enum RootNavigatekey {
     MessageDetail = 'MessageDetail',
     Modal = 'Modal',
     NotFound = 'NotFound',
+    Notification = 'Notification',
+  
 }

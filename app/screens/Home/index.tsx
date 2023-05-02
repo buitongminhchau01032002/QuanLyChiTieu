@@ -32,6 +32,7 @@ import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { logout } from 'slice/auth';
 import { AppTabsStackScreenProps } from 'types';
+import HomeNavigator from 'navigation/HomeNavigator'
 
 export const HomeScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey.Home>) => {
     // hooks
@@ -80,7 +81,7 @@ export const HomeScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey.H
                     </TouchableOpacity>
 
                 </View>
-                <TouchableOpacity onPress={() => { /*notification screen*/ }} >
+                <TouchableOpacity onPress={() => {}} >
                     <Icon as={<FontAwesome name="bell" />} size={6} color="black" marginLeft={4} />
                 </TouchableOpacity>
             </View>
