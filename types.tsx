@@ -26,6 +26,7 @@ export type AppTabsStackParamList = {
     [AppTabsNavigationKey.FloatButton]: undefined;
     [AppTabsNavigationKey.Budget]: undefined;
     [AppTabsNavigationKey.Account]: undefined;
+    [AppTabsNavigationKey.Transaction]: undefined;
 };
 
 export type AuthStackParamList = {
