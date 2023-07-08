@@ -9,6 +9,7 @@ export enum AppTabsNavigationKey {
     FloatButton = 'Add Transaction',
     Account = 'Account',
     Budget = 'Budget',
+    Transaction = 'Transaction',
 }
 
 export enum AppDrawerNavigationKey {

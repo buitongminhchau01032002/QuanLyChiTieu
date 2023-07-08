@@ -3,13 +3,13 @@ import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AppTabsStackParamList, RootStackScreenProps } from '../../types';
 import { HomeScreen } from 'screens/Home';
-import { MessageScreen } from 'screens/Message';
 import { AppTabsNavigationKey, RootNavigatekey } from './navigationKey';
 import { Avatar, Box, Button, Icon, View, useTheme } from 'native-base';
 import { useBackgroundColor } from 'hooks/index';
 import { AccountScreen } from 'screens/Account';
 import { AddTransactionScreeen } from 'screens/FloatButton';
 import { BudgetScreen } from "screens/Budget";
+import { TransactionScreen } from 'screens/Transaction';
 
 const BottomTab = createBottomTabNavigator<AppTabsStackParamList>();
 
@@ -41,11 +41,12 @@ export default function AppTabsNavigator() {
         }}
       />
       <BottomTab.Screen
-        name={AppTabsNavigationKey.Message}
-        component={MessageScreen}
+        name={AppTabsNavigationKey.Transaction}
+        component={TransactionScreen}
         options={{
-          title: AppTabsNavigationKey.Message,
-          tabBarIcon: ({ color }) => <TabBarIcon name="comment" color={color} />,
+          title: AppTabsNavigationKey.Transaction,
+          tabBarIcon: ({ color }) => <TabBarIcon name="list-alt" color={color} />,
+          header: () => null
         }}
       />
       <BottomTab.Screen
