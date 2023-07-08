@@ -11,6 +11,7 @@ import {
   AppDrawerNavigationKey,
   AppTabsNavigationKey,
   AuthNavigationKey,
+  HomeNavigationKey,
   RootNavigatekey,
 } from "./navigationKey";
 

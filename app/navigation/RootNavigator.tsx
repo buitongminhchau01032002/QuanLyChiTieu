@@ -11,7 +11,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 import AuthNavigator from './AuthNavigator';
 import AppTabsNavigator from './AppTabsNavigator';
 import React, { useEffect, useRef, useState } from 'react';
-import { AuthNavigationKey, RootNavigatekey } from './navigationKey';
+import { AuthNavigationKey, HomeNavigationKey, RootNavigatekey } from './navigationKey';
 import { IntroScreen } from 'screens/Intro';
 import { waitAsyncAction } from 'utils/async';
 import { i18Config } from 'i18n/index';
@@ -25,6 +25,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import { reLogin } from 'slice/auth';
 import { MessageDetailScreen } from 'screens/Message/pages/MessagesDetail';
 import { WalletScreen } from 'screens/Wallet';
+import { NotificationScreen } from 'screens/Notification';
+import HomeNavigator from './HomeNavigator';
 
 export default function Navigation() {
     // hooks
@@ -95,7 +97,9 @@ function RootNavigator() {
                 <Stack.Screen name={RootNavigatekey.Intro} component={IntroScreen} options={{ headerShown: false }} />
                 <Stack.Screen name={RootNavigatekey.NotFound} component={NotFoundScreen} options={{ title: 'Oops!' }} />
                 <Stack.Screen name={RootNavigatekey.Modal} component={ModalScreen} />
+                
             </Stack.Group>
+            <Stack.Screen name={RootNavigatekey.Notification} component={HomeNavigator} options={{ headerShown: false }} />
         </Stack.Navigator>
     );
 }

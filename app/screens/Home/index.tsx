@@ -32,6 +32,7 @@ import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { logout } from 'slice/auth';
 import { AppTabsStackScreenProps } from 'types';
+import HomeNavigator from 'navigation/HomeNavigator'
 
 export const HomeScreen = (props: AppTabsStackScreenProps<AppTabsNavigationKey.Home>) => {
     // hooks

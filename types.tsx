@@ -12,6 +12,7 @@ import {
     AppTabsNavigationKey,
     AuthNavigationKey,
     AppDrawerNavigationKey,
+    HomeNavigationKey,
 } from 'navigation/navigationKey';
 
 declare global {
@@ -27,6 +28,10 @@ export type AppTabsStackParamList = {
     [AppTabsNavigationKey.Budget]: undefined;
     [AppTabsNavigationKey.Account]: undefined;
     [AppTabsNavigationKey.Transaction]: undefined;
+};
+
+export type HomeStackParamList = {
+    [HomeNavigationKey.Notification]: undefined;
 };
 
 export type AuthStackParamList = {
@@ -46,6 +51,8 @@ export type RootStackParamList = {
     [RootNavigatekey.NotFound]: undefined;
     [RootNavigatekey.Intro]: undefined;
     [RootNavigatekey.Modal]: undefined;
+    [RootNavigatekey.Notification]: NavigatorScreenParams<HomeStackParamList> | undefined;
+
 };
 // props type
 export type AppTabsStackScreenProps<Screen extends keyof AppTabsStackParamList> = CompositeScreenProps<

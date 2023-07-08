@@ -24,4 +24,6 @@ export enum RootNavigatekey {
     MessageDetail = 'MessageDetail',
     Modal = 'Modal',
     NotFound = 'NotFound',
+    Notification = 'Notification',
+  
 }

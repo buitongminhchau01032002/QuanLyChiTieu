@@ -14,11 +14,13 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Checkbox,
+  Button,
+  Center,
+  Heading,
 } from "native-base";
 import Animated from "react-native-reanimated";
 import { AuthStackScreenProps } from "../../../types";
 import { useState } from "react";
-import { FontAwesome } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 import React from "react";
 import * as Yup from "yup";
@@ -33,10 +35,32 @@ import { CButton } from "components/Button";
 import { APP_PADDING } from "app/constants/Layout";
 import { AvatarLogin } from "./components/AvatarLogin";
 import { useLoginAnimation } from "./hooks";
-
+import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
+import { emailValidator } from "app/helpers/emailValidator";
+import { passwordValidator } from "app/helpers/passwordValidator";
 export const SignInScreen = ({
   navigation,
 }: AuthStackScreenProps<AuthNavigationKey.SignIn>) => {
+  const [email, setEmail] = useState({ value: '', error: '' })
+  const [password, setPassword] = useState({ value: '', error: '' })
+  const [loading, setLoading] = useState(false);
+
+  const onClickSignin = async () => {
+    navigation.navigate(AuthNavigationKey.SignUp);
+  };
+
+  const onLoginPressed = () => {
+    
+    const emailError = emailValidator(email.value)
+   // const passwordError = passwordValidator(password.value)
+    if (emailError || password.value) {
+      setEmail({ ...email, error: emailError })
+      setPassword({ ...password, error: 'Please enter your Password' })
+      return
+    }
+    //code bla bla 
+   
+  }
   // hooks
   const { t } = useTranslation();
   const toast = useToast();
@@ -87,235 +111,109 @@ export const SignInScreen = ({
     username: Yup.string().required(t("general.required-field") ?? ""),
     password: Yup.string().required(t("general.required-field") ?? ""),
   });
-
   return (
-    <Box flex={1}>
-      <Image
-        source={localImages.bg}
-        position="absolute"
-        w="full"
-        h="full"
-        resizeMode="cover"
-        alt="bg"
-      />
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        flex={1}
-      >
-        <Formik
-          initialValues={initFormValue}
-          validationSchema={SignupSchema}
-          onSubmit={handleSignIn}
-        >
-          {({ handleSubmit, errors, values, setFieldValue }) => (
-            <Flex
-              p={APP_PADDING * 2}
-              flex="1"
-              mt="20"
-              justifyContent="space-between"
+
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      flex={1}
+      p={12}
+      w="full"
+      alignSelf="center"
+      justifyContent="center">
+
+      <Flex safeArea flex={1}>
+        <Center justifyContent='center' w='full' >
+          <Box flexDirection="column" safeArea p="2" py="8" w="full">
+            <Heading
+              textAlign="center"
+              size="lg"
+              fontWeight="600"
+              color="coolGray.800"
+              _dark={{
+                color: "warmGray.50",
+              }}
             >
-              <ScrollView>
-                <VStack space="lg" alignItems="center">
-                  <HStack
-                    w="full"
-                    justifyContent="center"
-                    alignItems="center"
-                    space="4"
-                    p="4"
-                  >
-                    <Pressable
-                      onPressIn={() => {
-                        setType(UserType.Parent);
-                        parent.handler();
-                      }}
-                    >
-                      <Animated.View style={[parent.animatedStyle]}>
-                        <AvatarLogin
-                          name={t(`sign-in-screen.parent`)}
-                          isActive={type === UserType.Parent}
-                          source={localImages.parentPlaceHoder}
-                        />
-                      </Animated.View>
-                    </Pressable>
-                    <Pressable
-                      onPressIn={() => {
-                        setType(UserType.Teacher);
-                        teacher.handler();
-                      }}
-                    >
-                      <Animated.View style={[teacher.animatedStyle]}>
-                        <AvatarLogin
-                          name={t(`sign-in-screen.teacher`)}
-                          isActive={type === UserType.Teacher}
-                          source={localImages.teacherPlaceHoder}
-                        />
-                      </Animated.View>
-                    </Pressable>
-                    <Pressable
-                      onPressIn={() => {
-                        setType(UserType.Driver);
-                        driver.handler();
-                      }}
-                    >
-                      <Animated.View style={[driver.animatedStyle]}>
-                        <AvatarLogin
-                          name={t(`sign-in-screen.driver`)}
-                          isActive={type === UserType.Driver}
-                          source={localImages.driverPlaceHoder}
-                        />
-                      </Animated.View>
-                    </Pressable>
-                  </HStack>
-                  <FormControl isInvalid={Boolean(errors.username)}>
-                    <Input
-                      _input={{ color: "white" }}
-                      value={values.username}
-                      onChangeText={(text) => setFieldValue("username", text)}
-                      placeholder={t("general.email") + "*"}
-                      size="xl"
-                      height="16"
-                      borderLeftWidth={0}
-                      borderRightWidth={0}
-                      borderTopWidth={0}
-                      InputLeftElement={
-                        <Icon
-                          as={<FontAwesome name="user" />}
-                          size="lg"
-                          color="gray.400"
-                        />
-                      }
+              Welcome
+            </Heading>
+            <Heading
+              textAlign="center"
+              mt="1"
+              _dark={{
+                color: "warmGray.200",
+              }}
+              color="coolGray.600"
+              fontWeight="medium"
+              size="xs"
+            >
+              Sign In to continue!
+            </Heading>
+
+            <VStack space={3} mt="5" >
+              <FormControl  isRequired isInvalid={email.error.length > 0}>
+                <FormControl.Label>Email</FormControl.Label>
+                <Input
+                autoCapitalize="none"
+                  value={email.value}
+                  onChangeText={value => setEmail({ value: value, error: '' })}
+                  placeholder=" Email"
+                  size='lg'
+                  InputLeftElement={
+                    <Icon
+                      as={<MaterialIcons name="mail" />}
+                      size={5}
+                      ml="2"
+                      color="muted.400"
                     />
-                    <FormControl.ErrorMessage
-                      _text={{
-                        fontSize: "md",
-                      }}
-                      leftIcon={
-                        <Icon
-                          as={<FontAwesome name="exclamation-circle" />}
-                          size="sm"
-                        />
-                      }
-                    >
-                      {errors.username}
-                    </FormControl.ErrorMessage>
-                  </FormControl>
-                  <FormControl isInvalid={Boolean(errors.password)}>
-                    <Input
-                      value={values.password}
-                      _input={{ color: "white" }}
-                      onChangeText={(text) => setFieldValue("password", text)}
-                      placeholder={t("general.password") + "*"}
-                      size="xl"
-                      height="16"
-                      type={show ? "text" : "password"}
-                      borderLeftWidth={0}
-                      borderRightWidth={0}
-                      borderTopWidth={0}
-                      InputLeftElement={
-                        <Icon
-                          as={<FontAwesome name="lock" />}
-                          size="lg"
-                          color="gray.400"
-                        />
-                      }
-                      InputRightElement={
-                        <Pressable
-                          onPress={() => {
-                            setShow((cur) => !cur);
-                          }}
-                          mr="5"
-                        >
-                          <Icon
-                            as={
-                              <FontAwesome name={show ? "eye" : "eye-slash"} />
-                            }
-                            size="lg"
-                            color="gray.400"
-                          />
-                        </Pressable>
-                      }
-                    />
-                    <FormControl.ErrorMessage
-                      _text={{
-                        fontSize: "md",
-                      }}
-                      leftIcon={
-                        <Icon
-                          as={<FontAwesome name="exclamation-circle" />}
-                          size="sm"
-                        />
-                      }
-                    >
-                      {errors.password}
-                    </FormControl.ErrorMessage>
-                  </FormControl>
-                  <Checkbox
-                    value={"isAcceptTerm"}
-                    defaultIsChecked={true}
-                    onChange={setIsAcceptTerm}
-                    accessibilityLabel="This is a dummy checkbox"
-                    colorScheme="blue"
-                  >
-                    <Link
-                      _text={{
-                        color: "white",
-                      }}
-                    >
-                      {t("sign-in-screen.terms-accept")}
-                    </Link>
-                  </Checkbox>
-                  <CButton
-                    w="full"
-                    isLoading={isLoadingLoginAction}
-                    _text={{
-                      textTransform: "uppercase",
-                      fontWeight: "bold",
-                      fontSize: "md",
-                      color: "white",
-                    }}
-                    onPress={() => handleSubmit()}
-                  >
-                    {t("sign-in-screen.sign-in")}
-                  </CButton>
-                  <Link _text={{ color: "white" }}>
-                    {t("sign-in-screen.forgot-password")}
-                  </Link>
-                  <CButton
-                    w="full"
-                    variant="outline"
-                    _text={{
-                      textTransform: "uppercase",
-                      fontWeight: "bold",
-                      fontSize: "md",
-                    }}
-                    leftIcon={
-                      <Icon
-                        as={<FontAwesome name="qrcode" />}
-                        size="lg"
-                        color={"orange.900"}
-                      />
-                    }
-                    onPress={() => handleSubmit()}
-                  >
-                    {t("sign-in-screen.qr-sign-in")}
-                  </CButton>
-                </VStack>
-              </ScrollView>
-              <Text
-                fontSize="md"
-                color="white"
-                textAlign="center"
-                bold
-                mt={APP_PADDING}
+                  }/>
+                 {'error' in email ? <FormControl.ErrorMessage>{email.error}</FormControl.ErrorMessage> : null}
+              </FormControl>
+              <FormControl
+              isRequired isInvalid={password.error.length > 0}
               >
-                {t("sign-in-screen.contact-help", {
-                  number: CONTACT_NUMBER,
-                })}
-              </Text>
-            </Flex>
-          )}
-        </Formik>
+                <FormControl.Label>Password</FormControl.Label>
+                <Input
+                  value={password.value}
+                  onChangeText={value => setPassword({ value: value, error: '' })}
+                  placeholder=" Password"
+                  size='lg'
+                  InputLeftElement={
+                    <Icon
+                      as={<MaterialIcons name="lock" />}
+                      size={5}
+                      ml="2"
+                      color="muted.400"
+                    />
+                  }
+                  type={show ? "text" : "password"} InputRightElement={<Pressable onPress={() => setShow(!show)}>
+                    <Icon as={<MaterialIcons name={show ? "visibility" : "visibility-off"} />} size={5} mr="2" color="muted.400" />
+                  </Pressable>}
+                />
+                 {'error' in password ? <FormControl.ErrorMessage>{password.error}</FormControl.ErrorMessage> : null}
+              </FormControl>
+              <Button
+                mt="2"
+                size='lg'
+                // colorScheme="indigo"
+                onPress={() => onLoginPressed()}
+              
+                isLoading={loading}
+              >
+               Login
+              </Button>
+              <Flex
+                flexDirection='row'
+                justifyContent='center'
+                marginTop={2}
+                >
+                <Text>Don’t have an account? </Text>
+                <Text color={"green.500"} onPress={() => onClickSignin()}>Sign up</Text>
+              </Flex>
+              
+          </VStack> 
+        </Box>
+    </Center> 
+        </Flex> 
+        
       </KeyboardAvoidingView>
-    </Box>
-  );
+  ) 
 };

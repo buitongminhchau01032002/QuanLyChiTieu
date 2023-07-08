@@ -13,6 +13,7 @@ import { TransactionScreen } from 'screens/Transaction';
 
 const BottomTab = createBottomTabNavigator<AppTabsStackParamList>();
 
+
 export default function AppTabsNavigator() {
   const { tabBarBackground } = useBackgroundColor();
   const { colors } = useTheme();
@@ -91,6 +92,11 @@ export default function AppTabsNavigator() {
           title: 'Account',
           tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
         }}
+      />
+       <BottomTab.Screen
+        name={AppTabsNavigationKey.Notification}
+        component={NotificationScreen}
+        
       />
     </BottomTab.Navigator>
   );
